@@ -1,0 +1,39 @@
+{
+  "author": "repometric <hi@repometric.com>",
+  "name": "@repometric/github-bot",
+  "version": "0.0.0-development",
+  "description": "Intelligent system that will be used for PR validation",
+  "homepage":"https://github.com/repometric/github-bot",
+  "license": "MIT",
+  "contributors":["GlebBerjoskin"],
+  "keywords": [
+    "repometric",
+    "probot",
+    "github",
+    "probot-app"
+  ],
+  "scripts": {
+    "dev": "nodemon --exec \"npm start\"",
+    "start": "probot run ./index.js",
+    "lint": "standard --fix",
+    "test": "jest && standard",
+    "test:watch": "jest --watch --notify --notifyMode=change --coverage"
+  },
+  "dependencies": {
+    "probot": "^7.0.0"
+  },
+  "devDependencies": {
+    "jest": "^22.4.3",
+    "nodemon": "^1.17.2",
+    "smee-client": "^1.0.2",
+    "standard": "^10.0.3"
+  },
+  "engines": {
+    "node": ">= 8.3.0"
+  },
+  "standard": {
+    "env": [
+      "jest"
+    ]
+  }
+}
