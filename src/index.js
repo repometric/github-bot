@@ -1,11 +1,11 @@
 module.exports = littleSmart;
 
-const handlePullRequest = require('./handlePullRequest')
+const handlePullRequest = require('./handlePullRequest');
 
-function littleSmart (robot) {
+function littleSmart(robot) {
   robot.on([
     'pull_request.opened',
     'pull_request.reopened',
-    'pull_request.edit'
-  ], handlePullRequest)
+    'pull_request.edited'
+  ], handlePullRequest);
 }
