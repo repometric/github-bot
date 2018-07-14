@@ -1,16 +1,25 @@
-module.exports = handlePullRequest
+const helper = require("./helper.js");
 
-async function handlePullRequest (context) {
-  const {title, html_url: htmlUrl, head} = context.payload.pull_request
-  const status = 'error';
+function handlePullRequest(context) {
+  const task = helper.setStatus(context, "pending");
 
-  console.log(`Updating PR "${title}" (${htmlUrl}): ${status}`)
+  Promise.all([task]).then(data => {
+    const { title, html_url: htmlUrl, head } = context.payload.pull_request;
 
-  context.github.repos.createStatus(context.repo({
-    sha: head.sha,
-    state: status,
-    target_url: '',
-    description: 'PR hasn\'t passed check',
-    context: 'little&smart'
-  }))
+    const workingDirectory = helper.getWorkingDirectory(head.sha);
+
+    helper.runGit(context, head.repo.full_name, head.ref, workingDirectory);
+
+    const errors = helper.runAnalysis(context, workingDirectory);
+
+    helper.deleteWorkingDirectory(workingDirectory + "\\**");
+
+    if (errors) {
+      helper.setStatus(context, "error");
+    }
+    else {
+      helper.setStatus(context, "success");
+    }
+  })
 }
+module.exports = handlePullRequest;
