@@ -3,6 +3,7 @@ const mkdirp = require("mkdirp");
 const path = require("path");
 const process = require("process");
 const cmdWrapper = require('./cmdWrapper');
+const configuration = require('./config.json')
 
 var helperModule = (function () {
 	const getWorkingDirectory = (sha) => {
@@ -55,17 +56,11 @@ var helperModule = (function () {
 
 	const setStatus = (context, statusArgument) => {
 		const { title, html_url: htmlUrl, head } = context.payload.pull_request;
-		let information;
-		switch(statusArgument){
-			case "error":
-			information = "There are some errors"
-			break;
-			case "success":
-			information = "Check is now completed";
-			break;
-			case "pending":
-			information = "Running analysis"
-			break;
+		let information = configuration.statuses[statusArgument];
+		if (!information) {
+			console.log("An error occured: wrong status");
+			statusArgument = "error";
+			information = configuration.statuses[statusArgument];
 		}
 		return context.github.repos.createStatus(context.repo({
 			sha: head.sha,

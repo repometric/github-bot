@@ -1,0 +1,7 @@
+{
+    "statuses":{
+        "error":"There are some errors",
+        "pending":"Running analysis",
+        "success":"Check is now completed"
+    }
+}
