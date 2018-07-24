@@ -1,0 +1,10 @@
+{
+  "extends": "google",
+  "rules": {
+    "linebreak-style":"off",
+    "no-tabs":"off"
+  },
+  "parserOptions": {
+    "ecmaVersion": 6
+  }
+}
