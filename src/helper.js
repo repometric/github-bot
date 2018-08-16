@@ -2,7 +2,7 @@ const del = require('del');
 const mkdirp = require('mkdirp');
 const path = require('path');
 const process = require('process');
-const cmdWrapper = require('./cmdWrapper');
+const cmdWrapper = require('./runCmd');
 const configuration = require('./config.json');
 
 const helperModule = (function() {
