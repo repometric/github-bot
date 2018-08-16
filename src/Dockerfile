@@ -9,12 +9,12 @@ WORKDIR /app/src
 COPY . .
 
 #npm
-RUN npm install -g jshint
 RUN npm install
+RUN npm install -g jshint
 
 #variables
 ENV APP_ID 14564
-ENV PRIVATE_KEY_PATH ./little-smart.2018-07-10.private-key.pem
+ENV PRIVATE_KEY_PATH ./little-smart.2018-08-16.private-key.pem
 
 EXPOSE 8080
 ENTRYPOINT [ "npm", "start","./index.js" ]
